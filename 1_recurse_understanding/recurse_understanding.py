@@ -65,4 +65,29 @@ def binary_search_recurse(num_list, target):
             return binary_search_recurse(num_list[:mid], target)
 
 
+def binary_search_recurse_1(num_list, target):
+    if len(num_list) == 0:
+        return False
+    mid = len(num_list) // 2
+    if num_list[mid] == target:
+        return True
+    elif num_list[mid] > target:
+        binary_search_recurse_1(num_list[:mid], target)
+    else:
+        binary_search_recurse_1(num_list[mid + 1:], target)
+
+
+def binary_search_1(num_list, target):
+    start, end = 0, len(num_list)
+    while start <= end:
+        mid = (start + end) // 2
+        if num_list[mid] == target:
+            return True
+        elif num_list[mid] > target:
+            end = mid - 1
+        else:
+            start = mid + 1
+    return False
+
+
 print(binary_search_recurse([1, 2, 3, 4, 5, 6], 1))

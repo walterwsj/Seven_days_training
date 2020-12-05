@@ -108,6 +108,78 @@ class Tree:
             self.res.append(stack2.pop())
         return self.res
 
+    # Tree's level
+    def create_tree_by_list_1(self, num_list):
+        if len(num_list) == 0:
+            return None
+        self.root = TreeNode(num_list[0])
+        index, len_list = 1, len(num_list)
+        queue = [self.root]
+        while queue:
+            tmp_node = queue.pop(0)
+            if index == len_list:
+                break
+            if num_list[index]:
+                tmp_node.left = TreeNode(num_list[index])
+                queue.append(tmp_node.left)
+            index += 1
+            if index == len_list:
+                break
+            if num_list[index]:
+                tmp_node.right = TreeNode(num_list[index])
+                queue.append(tmp_node.right)
+            index += 1
+        return self.root
+
+    def breadth_search_1(self):
+        queue = [self.root]
+        while queue:
+            tmp = queue.pop(0)
+            self.res.append(tmp.val)
+            if tmp.left:
+                queue.append(tmp.left)
+            if tmp.right:
+                queue.append(tmp.right)
+        return self.res
+
+    def post_order_recurse(self, tree):
+        if tree:
+            self.post_order_recurse(tree.left)
+            self.post_order_recurse(tree.right)
+            self.res.append(tree.val)
+
+    def post_order_1(self, tree):
+        stack_pri, stack_sla = [tree], []
+        while stack_pri:
+            tmp = stack_pri.pop()
+            stack_sla.append(tmp)
+            if tmp.left:
+                stack_pri.append(tmp.left)
+            if tmp.right:
+                stack_pri.append(tmp.right)
+        while stack_sla:
+            self.res.append(stack_sla.pop().val)
+        return self.res
+
+    def in_order_1(self, tree):
+        stack = []
+        while stack or tree:
+            while tree:
+                stack.append(tree)
+                tree = tree.left
+            if stack:
+                tmp = stack.pop()
+                self.res.append(tmp.val)
+                tree = tree.right
+        return self.res
+
+    def get_deep_binary_tree(self, tree):
+        if tree is None:
+            return 0
+        left_tree = self.get_deep_binary_tree(tree.left)
+        right_tree = self.get_deep_binary_tree(tree.right)
+        return max(left_tree, right_tree) + 1
+
 
 if __name__ == "__main__":
     obj = Tree()

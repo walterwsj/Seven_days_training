@@ -46,3 +46,23 @@ def move_zero_3(num_list):
                 num_list[i] = 0
             tmp_zero_index += 1
     return num_list
+
+
+def move_zero_4(num_list):
+    tmp_index = 0
+    for i in range(len(num_list)):
+        if num_list[i] != 0:
+            num_list[i], num_list[tmp_index] = num_list[tmp_index], num_list[i]
+            tmp_index += 1
+    return num_list
+
+
+def move_zero_5(num_list):
+    tmp_index = 0
+    for i in range(len(num_list)):
+        if num_list[i] != 0:
+            num_list[tmp_index] = num_list[i]
+            if i != tmp_index:
+                num_list[i] = 0
+            tmp_index += 1
+    return num_list
