@@ -35,3 +35,14 @@ def move_zero_2(num_list):
                 num_list[i] = 0
             tmp_index += 1
     return num_list
+
+
+def move_zero_3(num_list):
+    tmp_zero_index = 0
+    for i in range(len(num_list)):
+        if num_list[i] != 0:
+            num_list[tmp_zero_index] = num_list[i]
+            if tmp_zero_index != i:
+                num_list[i] = 0
+            tmp_zero_index += 1
+    return num_list

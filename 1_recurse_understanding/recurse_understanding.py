@@ -19,11 +19,50 @@ def get_fib_n_1(n):
     if 0 < n <= 2:
         return 1
     a, b = 1, 1
-    for i in range(3, n+1):
+    for i in range(3, n + 1):
         res = a + b
         a = b
         b = res
     return a
 
 
-print(get_fib_n_1(6))
+def get_fib_n_2(n):
+    if n < 1:
+        return 0
+    if 1 <= n <= 2:
+        return 1
+    a, b = 1, 1
+    for i in range(3, n + 1):
+        res = a + b
+        a = b
+        b = res
+    return a
+
+
+def binary_search(num_list, target):
+    start, end = 0, len(num_list) - 1
+    while start <= end:
+        mid = (start + end) // 2
+        if target == num_list[mid]:
+            return True
+        elif target > num_list[mid]:
+            start = mid + 1
+        else:
+            end = mid - 1
+    return False
+
+
+def binary_search_recurse(num_list, target):
+    if len(num_list) == 0:
+        return False
+    else:
+        mid = len(num_list) // 2
+        if num_list[mid] == target:
+            return True
+        elif num_list[mid] < target:
+            return binary_search_recurse(num_list[mid + 1:], target)
+        else:
+            return binary_search_recurse(num_list[:mid], target)
+
+
+print(binary_search_recurse([1, 2, 3, 4, 5, 6], 1))
