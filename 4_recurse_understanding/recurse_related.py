@@ -18,6 +18,17 @@ def recursion(level,param1,param2):
 """
 
 
+def get_go_upstairs(n):
+    if 0 < n <= 2:
+        return n
+    step_1, step_2, step_res = 1, 2, 0
+    for i in range(3, n + 1):
+        step_res = step_1 + step_2
+        step_1 = step_2
+        step_2 = step_res
+    return step_res
+
+
 class MySolution:
     def __init__(self, array=None):
         if array is None:
@@ -34,7 +45,9 @@ class MySolution:
             self.generate_parenthesis(left, right + 1, max_level, empty_str + ')')
 
 
-if __name__ == "__main__":
-    ms = MySolution()
-    ms.generate_parenthesis(0,0, 3, "")
-    print(ms.array)
+# if __name__ == "__main__":
+#     ms = MySolution()
+#     ms.generate_parenthesis(0, 0, 3, "")
+#     print(ms.array)
+
+print(get_go_upstairs(6))
