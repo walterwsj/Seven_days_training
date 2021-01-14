@@ -121,3 +121,23 @@ class LinkList:
             p_slow = p_slow.next
             p_fast = p_fast.next
         return p_slow
+
+    def get_last_kth_num(self, k):
+        if k < 0:
+            raise ValueError("invalid param")
+        list_len = self.get_list_length()
+        if k > list_len:
+            raise ValueError("invalid param")
+        elif k == list_len:
+            return self.head
+        elif k == 0:
+            return self.last
+        else:
+            return self.get_node(list_len - k)
+
+    def get_list_length(self):
+        res, cur = 0, self.head.next
+        while cur:
+            res += 1
+            cur = cur.next
+        return res
