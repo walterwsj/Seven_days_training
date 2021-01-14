@@ -141,3 +141,11 @@ class LinkList:
             res += 1
             cur = cur.next
         return res
+
+    def print_reverse(self):
+        stack = []
+        tmp_node = self.head
+        while tmp_node:
+            stack.append(tmp_node.data)
+            tmp_node = tmp_node.next
+        return stack[::-1]
