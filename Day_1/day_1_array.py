@@ -163,5 +163,5 @@ def get_max_area_optimize(num_list):
     return res
 
 
-result_list = [2, 1, 5, 6, 2, 3]
-print(get_max_area_regular(result_list))
+a = [-1, 0, 1, 2, -1, -4]
+print(three_nums_sum_optimize(a))
