@@ -163,5 +163,8 @@ def get_max_area_optimize(num_list):
     return res
 
 
+
+
+
 a = [-1, 0, 1, 2, -1, -4]
 print(three_nums_sum_optimize(a))

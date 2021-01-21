@@ -56,6 +56,16 @@ def two_sum(num_list, target):
     return res
 
 
+def two_sum_optimize(nums, target):
+    dic, res = {}, []
+    for index, value in enumerate(nums):
+        rest_part = target - value
+        if rest_part in dic:
+            return [dic[rest_part], index]
+        else:
+            dic[value] = index
+
+
 def three_nums_sum_regular(num_list):
     res, len_num = set(), len(num_list)
     num_list.sort()
