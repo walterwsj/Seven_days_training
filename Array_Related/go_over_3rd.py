@@ -111,6 +111,20 @@ class Node:
         self.next = None
 
 
+def reverse(start_node):
+    if start_node is None or start_node.next is None:
+        return start_node
+    pre = start_node
+    cur = start_node.next
+    while cur:
+        next_node = cur.next
+        cur.next = pre
+        pre = cur
+        cur = next_node
+    start_node.next = None
+    return pre
+
+
 class Link:
     def __init__(self):
         self.head = None
@@ -172,6 +186,7 @@ class Link:
             cur = tmp
         self.head.next = None
         self.head = pre
+        return self.head
 
     def is_circle(self):
         p1, p2 = self.head, self.head
@@ -246,43 +261,50 @@ class Link:
             self.head = tmp
         return dummy.next
 
-    def reverse_k_group_tail(self, k):
+    def reverse_k_group(self, k):
         dummy = Node(0)
         dummy.next = self.head
-        pre = dummy
-        tail = dummy
-        while True:
+        pre, tail = dummy, dummy
+        while tail.next:
             count = k
             while count and tail:
                 count -= 1
                 tail = tail.next
             if not tail:
                 break
-            while pre.next != tail:
-                cur = pre.next
-                pre.next = cur.next
-                cur.next = tail.next
-            pre = self.head
-            tail = self.head
+            start_node = pre.next
+            next_node = tail.next
+            tail.next = None
+            pre.next = reverse(start_node)
+            start_node.next = next_node
+            pre = start_node
+            tail = start_node
         return dummy.next
 
 
+def reverse_two_nodes(head, tail):
+    pre, next_node = None, None
+    while head != tail:
+        next_node = head.next
+        head.next = pre
+        pre = head
+        head = next_node
+    return pre
+
+
 def reverse_k_group_recurse(head, k):
-    cur = head
-    count = 0
-    while cur and count != k:
-        cur = cur.next
-        count += 1
-    if count == k:
-        cur = reverse_k_group_recurse(cur, k)
-        while count:
-            tmp = head.next
-            head.next = cur
-            cur = head
-            head = tmp
-            count -= 1
-        head = cur
-    return head
+    if head is None or head.next is None:
+        return head
+    tail = head
+    count = k
+    while count:
+        if not tail:
+            return head
+        tail = tail.next
+        count -= 1
+    new_head = reverse_two_nodes(head, tail)
+    head.next = reverse_k_group_recurse(tail, k)
+    return new_head
 
 
 a = [1]
